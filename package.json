@@ -1,0 +1,30 @@
+{
+  "name": "infernal-siege",
+  "version": "1.0.1",
+  "description": "Infernal Siege - A Persistent Browser Based Game",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "init-db": "node server/database/database.js"
+  },
+  "keywords": [
+    "pbbg",
+    "game",
+    "node",
+    "sqlite",
+    "dark fantasy"
+  ],
+  "author": "You and Gemini",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+} 
