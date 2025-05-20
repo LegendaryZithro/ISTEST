@@ -1,0 +1,624 @@
+/* === Modern Admin Dashboard Styles === */
+
+/* --- Variables (Admin Specific) --- */
+:root {
+    --admin-bg-main: #f4f7fc; /* Light grey background */
+    --admin-bg-sidebar: #ffffff; /* White sidebar */
+    --admin-bg-header: #ffffff;
+    --admin-bg-card: #ffffff;
+    --admin-text-primary: #333a53; /* Dark blue/grey for text */
+    --admin-text-secondary: #6c757d; /* Lighter grey for secondary text */
+    --admin-accent-primary: #007bff; /* Primary blue */
+    --admin-accent-secondary: #6c757d; /* Grey for borders, secondary actions */
+    --admin-accent-success: #28a745;
+    --admin-accent-danger: #dc3545;
+    --admin-accent-warning: #ffc107;
+    --admin-border-color: #dee2e6; /* Light border color */
+    --admin-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
+    --admin-font-primary: 'Open Sans', sans-serif;
+    --admin-font-secondary: 'Montserrat', sans-serif; 
+}
+
+body#admin-page {
+    font-family: var(--admin-font-primary);
+    background-color: var(--admin-bg-main);
+    color: var(--admin-text-primary);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 15px; /* Slightly smaller base for admin UI */
+}
+
+/* --- Admin Top Bar --- */
+#admin-top-bar {
+    background-color: var(--admin-bg-header);
+    color: var(--admin-text-primary);
+    padding: 0 1.5rem;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--admin-border-color);
+    box-shadow: var(--admin-shadow);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1002; /* Ensure it's above game top bar if any overlap could occur */
+    box-sizing: border-box;
+}
+
+#admin-header-title {
+    font-family: var(--admin-font-secondary);
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--admin-accent-primary);
+}
+
+#admin-useful-stats span {
+    font-size: 0.9em;
+    color: var(--admin-text-secondary);
+}
+
+#return-to-game-btn {
+    background-color: var(--admin-accent-secondary);
+    color: white;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--admin-font-secondary);
+    font-weight: 500;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#return-to-game-btn:hover {
+    background-color: #5a6268;
+}
+
+/* --- Admin Container --- */
+#admin-container {
+    display: flex;
+    flex-grow: 1;
+    margin-top: 65px; /* Height of admin-top-bar */
+}
+
+/* --- Admin Left Navigation --- */
+#admin-left-nav {
+    width: 240px; /* Fixed width for modern sidebar */
+    min-width: 240px;
+    background-color: var(--admin-bg-sidebar);
+    padding: 1.5rem 0;
+    border-right: 1px solid var(--admin-border-color);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    overflow-y: auto;
+}
+
+#admin-left-nav h2 {
+    font-family: var(--admin-font-secondary);
+    color: var(--admin-text-primary);
+    text-align: left;
+    font-size: 0.8em;
+    padding: 0 1.5rem 0.5rem 1.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.admin-nav-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: calc(100% - 3rem); /* Full width minus padding */
+    margin: 0.25rem 1.5rem;
+    padding: 12px 15px;
+    text-align: left;
+    background-color: transparent;
+    color: var(--admin-text-secondary);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--admin-font-primary);
+    font-weight: 500; /* Medium weight for nav items */
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-transform: none;
+}
+.admin-nav-button i {
+    width: 18px;
+    text-align: center;
+    color: var(--admin-text-secondary);
+    font-size: 1.1em; /* Slightly larger icons */
+    transition: color 0.2s ease;
+}
+.admin-nav-button:hover {
+    background-color: #e9ecef; /* Light hover */
+    color: var(--admin-accent-primary);
+}
+.admin-nav-button:hover i {
+    color: var(--admin-accent-primary);
+}
+.admin-nav-button.active {
+    background-color: var(--admin-accent-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+.admin-nav-button.active i {
+    color: #ffffff;
+}
+
+/* --- Admin Content Area --- */
+#admin-content-area {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background-color: var(--admin-bg-main);
+}
+
+.admin-page-content h2 {
+    font-family: var(--admin-font-secondary);
+    color: var(--admin-text-primary);
+    border-bottom: 1px solid var(--admin-border-color);
+    padding-bottom: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+/* Modern Dashboard Cards */
+.admin-dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.dashboard-card {
+    background-color: var(--admin-bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border-color);
+}
+.dashboard-card h3 {
+    font-family: var(--admin-font-secondary);
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--admin-text-primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dashboard-card h3 i {
+    color: var(--admin-accent-primary);
+    font-size: 0.9em;
+}
+.dashboard-card p {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--admin-accent-primary);
+}
+.dashboard-card p.status-ok { color: var(--admin-accent-success); }
+.dashboard-card p.status-warning { color: var(--admin-accent-warning); }
+.dashboard-card p.status-danger { color: var(--admin-accent-danger); }
+.dashboard-card p.status-ok i, .dashboard-card p.status-warning i, .dashboard-card p.status-danger i {
+    margin-right: 5px;
+}
+
+/* Modern Admin Forms */
+.admin-form.modern-form {
+    background-color: var(--admin-bg-card);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border-color);
+}
+.admin-form.modern-form h3 {
+    color: var(--admin-text-primary);
+    font-family: var(--admin-font-secondary);
+    font-weight: 600;
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.admin-form.modern-form .form-grid {
+    gap: 1.5rem; /* More space in form grid */
+}
+.admin-form.modern-form label {
+    color: var(--admin-text-secondary);
+    font-weight: 500;
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+}
+.admin-form.modern-form input[type="text"], 
+.admin-form.modern-form input[type="number"],
+.admin-form.modern-form select, 
+.admin-form.modern-form textarea {
+    background-color: #fff;
+    border: 1px solid #ced4da; /* Standard bootstrap-like border */
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95em;
+    color: var(--admin-text-primary);
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.admin-form.modern-form input:focus, 
+.admin-form.modern-form select:focus, 
+.admin-form.modern-form textarea:focus {
+    border-color: #80bdff; /* Blue focus like bootstrap */
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.admin-form.modern-form .checkbox-group {
+    display: flex;
+    align-items: center;
+}
+.admin-form.modern-form .checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem; 
+    width: 1.1em; height: 1.1em;
+}
+.admin-form.modern-form .checkbox-group label {
+    margin-bottom: 0; /* Align with checkbox */
+    font-weight: normal;
+    color: var(--admin-text-primary);
+}
+.admin-form.modern-form .form-actions button {
+    font-family: var(--admin-font-primary);
+    font-weight: 500;
+    padding: 10px 20px;
+    font-size: 0.95em;
+}
+.control-button.primary-action-btn {
+    background-color: var(--admin-accent-primary);
+    color: white;
+}
+.control-button.primary-action-btn:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+.control-button.alt-button {
+    background-color: var(--admin-accent-secondary);
+    color: white;
+}
+.control-button.alt-button:hover {
+    background-color: #545b62; /* Darker grey */
+}
+
+/* Modern Table Styling (for Users & Items) */
+#user-list-container table, #item-list-container table {
+    width: 100%;
+    border-collapse: separate; /* Allows for border-radius on cells/table */
+    border-spacing: 0;
+    margin-top: 1.5rem;
+    background-color: var(--admin-bg-card);
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border-color);
+    border-radius: 8px;
+    overflow: hidden; /* For border-radius on table */
+}
+#user-list-container th, #item-list-container th,
+#user-list-container td, #item-list-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--admin-border-color);
+    color: var(--admin-text-primary);
+    font-size: 0.9em;
+}
+#user-list-container tr:last-child td, 
+#item-list-container tr:last-child td {
+    border-bottom: none;
+}
+#user-list-container th, #item-list-container th {
+    background-color: #f8f9fa; /* Very light grey for headers */
+    color: var(--admin-text-primary);
+    font-family: var(--admin-font-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.8em;
+}
+#user-list-container tr:hover td, 
+#item-list-container tr:hover td {
+    background-color: #eef2f7; /* Subtle hover for rows */
+}
+#user-list-container table .action-button,
+#item-list-container table .action-button {
+    font-size: 0.8em;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: 1px solid var(--admin-border-color);
+    background-color: #fff;
+    color: var(--admin-accent-primary);
+}
+#user-list-container table .action-button:hover,
+#item-list-container table .action-button:hover {
+    background-color: var(--admin-accent-primary);
+    color: #fff;
+    border-color: var(--admin-accent-primary);
+}
+#user-list-container table .delete-user-btn:hover, /* Example specific color */
+#item-list-container table .delete-item-btn:hover {
+    background-color: var(--admin-accent-danger);
+    border-color: var(--admin-accent-danger);
+    color: #fff;
+}
+
+/* Admin Section Controls (e.g., Add New Item button) */
+.admin-section-controls {
+    margin-bottom: 1.5rem;
+    text-align: right;
+}
+.admin-section-controls .control-button {
+    background-color: var(--admin-accent-primary);
+    color: white;
+}
+.admin-section-controls .control-button:hover {
+    background-color: #0056b3;
+}
+
+/* Visual Editor (Keep it simple) */
+#admin-content-editor h2 { text-align: center; }
+#visual-editor-controls { /* ... as before, will inherit some form styles ... */ 
+    background-color: #e9ecef; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; border: 1px solid var(--admin-border-color);
+}
+#visual-editor-controls label { color: var(--admin-text-primary); font-weight: 500; }
+#page-selector { min-width: 250px; }
+#mock-toolbar { border-left: 1px solid var(--admin-border-color); padding-left: 1rem; margin-left: 0.5rem; }
+.mock-tool-btn { background-color: #fff; color: var(--admin-text-secondary); border: 1px solid var(--admin-border-color); cursor: help; }
+.mock-tool-btn:hover { background-color: #f8f9fa; border-color: var(--admin-accent-primary); }
+#editor-actions { margin-left: auto; }
+#visual-editor-canvas-container { border: 1px solid var(--admin-border-color); padding: 1rem; background-color: #fff; border-radius: 6px; min-height: 500px; display: flex; flex-direction: column; }
+.editor-note { font-size: 0.9em; color: var(--admin-accent-warning); text-align: center; margin-bottom: 1rem; padding: 0.5rem; background-color: #fff3cd; border-radius: 4px; border: 1px solid #ffeeba;}
+#visual-editor-canvas { width: 100%; flex-grow: 1; border: 1px solid #ccc; }
+
+/* Responsive for Admin */
+@media (max-width: 992px) { /* Larger breakpoint for admin sidebar collapse */
+    #admin-left-nav {
+        position: fixed; /* Or absolute if preferred */
+        left: -260px; /* Hidden by default */
+        top: 65px; /* Below top bar */
+        height: calc(100vh - 65px);
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+    }
+    #admin-left-nav.open {
+        left: 0;
+    }
+    /* Add a toggle button in top bar for mobile if doing this */
+    #admin-container { margin-left: 0; } /* Content takes full width if nav is hidden */
+}
+
+@media (max-width: 768px) {
+    #admin-top-bar { padding: 0.5rem; flex-direction: column; height: auto; align-items: stretch; }
+    #admin-header-title { text-align: center; margin-bottom: 0.5rem;}
+    #admin-useful-stats { text-align: center; margin-bottom: 0.5rem; }
+    #return-to-game-btn { width: 100%; margin-top: 0.5rem; }
+    #admin-container { margin-top: 120px; /* Approx height of wrapped top bar */ flex-direction:column; }
+    #admin-left-nav, #admin-content-area {
+        width: 100%;
+        min-width: unset;
+        margin-left: 0; /* Reset if sidebar was part of main flow */
+    }
+    .admin-dashboard-cards { grid-template-columns: 1fr; } /* Stack cards */
+    .admin-form .form-grid { grid-template-columns: 1fr; } /* Stack form grid items */
+}
+
+/* Admin Log Page Styles */
+#admin-content-logs h2 {
+    margin-bottom: 1rem; /* Tighter margin for log page title */
+}
+
+#admin-log-list-container table {
+    /* Uses general modern table styling defined earlier */
+    font-size: 0.85em; /* Slightly smaller font for logs */
+}
+
+#admin-log-list-container th.details-col, 
+#admin-log-list-container td.details-col {
+    max-width: 300px; /* Limit width of details column */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap; /* Allow wrapping but also respect pre-like formatting */
+    word-break: break-all; /* Break long JSON strings */
+}
+
+#admin-log-list-container td.details-col pre {
+    margin: 0;
+    padding: 5px;
+    background-color: var(--admin-bg-main); /* Match page background */
+    border-radius: 4px;
+    border: 1px dashed var(--admin-border-color);
+    font-size: 0.9em;
+    max-height: 100px; /* Limit height of pre block */
+    overflow-y: auto;
+}
+
+.pagination-controls {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.pagination-controls button {
+    /* General button styling from style.css will apply, can be overridden */
+    background-color: var(--admin-accent-secondary);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin: 0 5px;
+}
+
+.pagination-controls button:disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:not(:disabled):hover {
+    background-color: #5a6268;
+}
+
+#admin-log-page-info {
+    display: inline-block;
+    padding: 6px 10px;
+    color: var(--admin-text-secondary);
+    font-size: 0.9em;
+    vertical-align: middle;
+}
+
+/* Style for status messages in user list if not already present */
+#user-list-container .status-banned {
+    color: var(--admin-accent-danger);
+    font-weight: bold;
+}
+#user-list-container .status-muted {
+    color: var(--admin-accent-warning);
+    font-style: italic;
+}
+
+/* Recent Activity Section */
+.admin-recent-activity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.activity-column {
+    background-color: var(--admin-bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border-color);
+}
+
+.activity-column h3 {
+    font-family: var(--admin-font-secondary);
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--admin-text-primary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--admin-border-color);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.activity-column h3 i {
+    color: var(--admin-accent-primary);
+}
+
+ul.modern-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px; /* Limit height for scrollability */
+    overflow-y: auto;
+}
+
+ul.modern-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--admin-border-color);
+    font-size: 0.9em;
+    color: var(--admin-text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ul.modern-list li:last-child {
+    border-bottom: none;
+}
+ul.modern-list li .timestamp {
+    font-size: 0.8em;
+    color: #999;
+    margin-left: 10px;
+}
+ul.modern-list li .log-details {
+    font-size: 0.85em;
+    color: #777;
+    display: block; /* On new line */
+    margin-top: 4px;
+    white-space: pre-wrap; /* For JSON */
+    word-break: break-all;
+    background-color: var(--admin-bg-main);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Ensure message area in forms has modern class for consistency if not already applied everywhere */
+.admin-form .message-area.modern-message {
+    /* Styles already defined, this just ensures it can be targeted if needed for overrides */
+}
+
+/* Dungeon Management Specific Styles */
+#admin-content-dungeons .admin-form textarea, 
+#admin-content-dungeons .admin-form input[type="text"],
+#admin-content-dungeons .admin-form input[type="number"] {
+    font-family: var(--admin-font-primary); /* Ensure consistent font in textareas */
+}
+
+#dungeon-loot-manager {
+    background-color: var(--admin-bg-card);
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border-color);
+}
+
+#dungeon-loot-manager h3 {
+    font-family: var(--admin-font-secondary);
+    font-size: 1.4em;
+    color: var(--admin-accent-primary);
+    border-bottom: 1px solid var(--admin-border-color);
+    padding-bottom: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+#dungeon-loot-manager h3 #loot-manager-dungeon-name {
+    color: var(--admin-text-primary);
+    font-weight: normal;
+}
+
+#add-loot-item-form h4 {
+    font-family: var(--admin-font-secondary);
+    font-size: 1.1em;
+    color: var(--admin-text-primary);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#add-loot-item-form.small-form .form-grid.compact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Smaller columns for loot form */
+    gap: 0.75rem;
+}
+
+#add-loot-item-form.small-form label {
+    font-size: 0.85em;
+}
+
+#add-loot-item-form.small-form input, 
+#add-loot-item-form.small-form select {
+    padding: 6px 8px;
+    font-size: 0.9em;
+}
+
+#dungeon-loot-table-container table {
+    margin-top: 1rem;
+    font-size: 0.85em; /* Slightly smaller for loot table */
+}
+
+#dungeon-loot-table-container th,
+#dungeon-loot-table-container td {
+    padding: 8px 10px;
+}
+
+/* Adjust table action buttons generally if not already done */
+.admin-page-content table .action-button i {
+    margin-right: 4px;
+} 
