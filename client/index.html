@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-SYSTEM_DEFAULT">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infernal Siege - Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Infernal Siege!</h1>
+    </header>
+    <main>
+        <section id="intro">
+            <h2>About the Game</h2>
+            <p>The demonic hordes are at the gates! Carve out your legend in a world besieged by darkness. Gather power, forge alliances, and fight for survival in Infernal Siege, a persistent browser-based RPG where every choice matters.</p>
+        </section>
+        <section id="auth">
+            <h2>Join the Siege / Login</h2>
+            <div id="login-form" class="auth-form">
+                <h3><i class="fas fa-sign-in-alt"></i> Login to Your Citadel</h3>
+                <input type="text" id="login-username" placeholder="Username" required><br>
+                <input type="password" id="login-password" placeholder="Password" required><br>
+                <button id="login-btn"><i class="fas fa-key"></i> Login</button>
+            </div>
+            <hr class="form-divider">
+            <div id="register-form" class="auth-form">
+                <h3><i class="fas fa-user-plus"></i> Forge Your Account</h3>
+                <input type="text" id="register-username" placeholder="Username" required><br>
+                <input type="password" id="register-password" placeholder="Password" required><br>
+                <input type="password" id="register-confirm-password" placeholder="Confirm Password" required><br>
+                <button id="register-btn"><i class="fas fa-shield-alt"></i> Register</button>
+            </div>
+            <p id="auth-message" class="message-area"></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Infernal Siege</p>
+    </footer>
+</body>
+</html> 
