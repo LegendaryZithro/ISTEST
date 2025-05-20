@@ -1,0 +1,1201 @@
+/* Diablo-Inspired Dark Fantasy Theme - Extended for New Layout */
+
+/* --- Fonts --- */
+/* Imported in HTML: Cinzel for headers, Lato for body */
+
+/* --- Variables (Color Palette) --- */
+:root {
+    --primary-bg: #0d0c0c; /* Even darker, almost black */
+    --secondary-bg: #1a1818; /* Dark, slightly warmer grey for panels/cards */
+    --tertiary-bg: #2c2a2a; /* Lighter grey for accents or inner elements */
+    --primary-text: #b0aead; /* Muted, off-white/grey for body text */
+    --header-text: #e0c9a6; /* Pale gold/parchment for headers */
+    --accent-color: #c0392b; /* Blood/rust red */
+    --accent-hover: #e74c3c; /* Brighter red for hover */
+    --border-color: #3a3025; /* Dark, desaturated brown/bronze for borders */
+    --highlight-text: #fff0d4; /* Brighter parchment/gold for highlights */
+    --disabled-bg: #252525;
+    --disabled-text: #555555;
+    --success-color: #5cb85c; /* Keep a somewhat standard success green */
+    --error-color: var(--accent-color);
+    --jail-color: #e67e22; /* Darker, more thematic orange */
+    --event-color: #3498db; /* A contrasting blue for events */
+    --link-color: #8ab4f8; /* Standard link blue, adjust if needed */
+
+    --font-primary: 'Lato', sans-serif;
+    --font-secondary: 'Cinzel', serif; /* For titles, important text */
+
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+    --inset-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+    --text-shadow-header: 1px 1px 2px rgba(0,0,0,0.7), 0 0 5px rgba(0,0,0,0.3);
+    --text-shadow-glow: 0 0 8px var(--accent-hover);
+}
+
+/* --- General Styles --- */
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-bg);
+    background-image: url('https://www.transparenttextures.com/patterns/dark-ritual.png'); /* More thematic texture */
+    color: var(--primary-text);
+    line-height: 1.6;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+/* --- Top Bar --- */
+#top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #251e16, #1a130a);
+    color: var(--header-text);
+    padding: 0.5rem 1.5rem; /* More padding */
+    border-bottom: 3px solid #000; /* Thicker, darker border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    position: fixed; /* Fixed top bar */
+    width: calc(100% - 2rem); /* Adjust for padding */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 60px; /* Fixed height */
+}
+
+#logo-area {
+    font-family: var(--font-secondary);
+    font-size: 1.7em;
+    font-weight: 700;
+    text-shadow: var(--text-shadow-header);
+    letter-spacing: 1px;
+    color: var(--header-text);
+}
+#logo-area i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+#external-links a {
+    font-family: var(--font-secondary);
+    color: var(--primary-text);
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: color 0.2s, text-shadow 0.2s;
+    font-size: 0.9em;
+}
+#external-links a:hover {
+    color: var(--highlight-text);
+    text-shadow: var(--text-shadow-glow);
+}
+#external-links a i { margin-right: 6px; }
+
+#user-info-top {
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+#user-info-top #player-username-clickable-area {
+    cursor: pointer;
+    color: var(--primary-text);
+    transition: color 0.2s ease;
+    padding: 5px;
+}
+#user-info-top #player-username-clickable-area:hover,
+#user-info-top #player-username-clickable-area:focus {
+    color: var(--highlight-text);
+    text-decoration: underline;
+    outline: none;
+}
+#user-info-top span#player-username-top {
+    color: var(--highlight-text); 
+    font-weight: 600;
+}
+
+#logout-btn-top {
+    background: none;
+    border: none;
+    color: var(--primary-text);
+    font-size: 1.2em; /* Icon size */
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+}
+#logout-btn-top:hover {
+    color: var(--accent-hover);
+    transform: scale(1.1);
+}
+
+/* --- Game Container (Main Layout) --- */
+#game-container {
+    display: flex;
+    flex-grow: 1; /* Allows footer to stick to bottom */
+    margin-top: 60px; /* Height of top-bar */
+    padding: 1.5rem; /* More padding around main layout */
+    gap: 1.5rem;
+}
+
+/* --- Left Navigation Bar --- */
+#left-nav-bar {
+    width: 20%; /* Adjust as needed */
+    min-width: 220px;
+    background-color: var(--secondary-bg);
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+#avatar-area {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#avatar-area img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular avatar */
+    border: 3px solid var(--border-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+#player-stats-leftnav h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--header-text);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#player-stats-leftnav p {
+    font-size: 0.9em;
+    margin: 0.4rem 0;
+    color: var(--primary-text);
+}
+#player-stats-leftnav p span {
+    color: var(--highlight-text); 
+    font-weight: bold;
+}
+
+#page-navigation button {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    padding: 12px 15px;
+}
+#page-navigation button.active {
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 10px var(--accent-color) inset;
+    color: var(--highlight-text);
+}
+
+/* --- Gameplay Content Area (Main Middle Section) --- */
+#gameplay-content-area {
+    flex-grow: 1; /* Takes up remaining space */
+    background-color: rgba(10,10,10, 0.8); /* Slightly transparent dark bg */
+    padding: 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7) inset;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+#gameplay-content-area h2, #gameplay-content-area h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--header-text);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px #000;
+}
+/* Ensure action buttons within this area are styled */
+#gameplay-content-area button {
+     /* Inherits general button style, can add specifics if needed */
+}
+#gameplay-content-area .important-action {
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Styling for placeholder content sections to be populated by JS */
+.page-content > section, .page-content > aside {
+    background-color: transparent; /* Sections inside content area don't need double bg */
+    border: none;
+    box-shadow: none;
+    padding: 0; /* Reset padding if it was on old sections */
+}
+.page-content ul#log-list, .page-content ul#inventory-list {
+    max-height: 250px; /* More space if needed */
+}
+
+/* --- Right Sidebar --- */
+#right-sidebar {
+    width: 25%; /* Adjust as needed */
+    min-width: 280px;
+    background-color: var(--secondary-bg);
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between news and chat */
+}
+
+#game-news, #chat-channel {
+    flex-shrink: 0; /* Prevent shrinking if content is small */
+    background-color: var(--tertiary-bg); /* Slightly different bg for inner sections */
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+#game-news h2, #chat-channel h2 {
+    font-size: 1.3em;
+    margin-bottom: 0.8rem;
+}
+
+#game-news-feed p {
+    font-size: 0.85em;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 0.5rem;
+}
+#game-news-feed p:last-child { border-bottom: none; }
+
+#chat-tabs {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.chat-tab-btn {
+    flex-grow: 1;
+    background-color: var(--tertiary-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    padding: 8px 10px;
+    font-size: 0.8em;
+    border-radius: 4px 4px 0 0;
+    margin-right: 2px; /* Small gap between tabs */
+}
+.chat-tab-btn.active {
+    background-color: var(--secondary-bg);
+    color: var(--header-text);
+    border-bottom: 1px solid var(--secondary-bg); /* Make it look connected */
+}
+.chat-tab-btn:last-child { margin-right: 0; }
+
+#chat-feed {
+    height: 200px; /* Adjust as needed */
+    overflow-y: auto;
+    background-color: var(--primary-bg);
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 0.5rem;
+    font-size: 0.85em;
+}
+
+.chat-message {
+    margin-bottom: 0.3rem;
+}
+.chat-message span:first-child { /* Username */
+    color: var(--header-text);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#chat-input-area {
+    display: flex;
+}
+
+#chat-message-input {
+    flex-grow: 1;
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+    padding: 8px 10px;
+    font-size: 0.9em;
+}
+
+#chat-send-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+/* --- Messages & Logs --- */
+#auth-message, #action-message {
+    margin-top: 15px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#gameplay-content-area #action-message.success {
+    background-color: rgba(90, 138, 10, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+#gameplay-content-area #action-message.error {
+    background-color: rgba(158, 42, 43, 0.2);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+#gameplay-content-area #action-message.event {
+    background-color: rgba(60, 100, 150, 0.2);
+    color: var(--header-text);
+    border: 1px solid var(--header-text);
+}
+
+#cooldown-message {
+    color: var(--jail-color);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0; /* Adjusted padding */
+    background: #0a0a0a;
+    color: #666;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8em;
+    /* flex-shrink: 0; Removed as body is flex-column now */
+}
+
+/* Responsive adjustments for the new layout */
+@media(max-width: 1024px) { /* Tablet and smaller */
+    #game-container {
+        flex-direction: column;
+        margin-top: 66px; /* Keep below fixed top bar */
+    }
+    #left-nav-bar, #right-sidebar {
+        width: 100%;
+        min-width: unset;
+        max-height: 300px; /* Limit height on mobile for nav/sidebar */
+    }
+    #gameplay-content-area {
+        width: 100%;
+        order: 2; /* Main content below left nav if stacked */
+    }
+    #left-nav-bar { order: 1; }
+    #right-sidebar { order: 3; }
+}
+
+@media(max-width: 768px) { /* Mobile */
+    #top-bar {
+        padding: 0.3rem 0.5rem;
+        height: auto; /* Allow wrapping if needed */
+        flex-wrap: wrap; /* Allow items to wrap */
+    }
+    #logo-area { font-size: 1.5em; margin-bottom: 5px; width: 100%; text-align: center;}
+    #external-links { order: 3; width: 100%; text-align: center; margin-bottom: 5px;}
+    #user-info-top { order: 2; margin-bottom: 5px; width: 100%; text-align: center;}
+
+    #game-container {
+        margin-top: 0; /* Top bar no longer fixed height or not fixed at all */
+        padding-top: 100px; /* Add padding to account for potentially wrapped top-bar */
+    }
+    /* If top-bar is not fixed on mobile, remove margin-top from game-container or set to a smaller value */
+
+    #avatar-area img {
+        width: 100px;
+        height: 100px;
+    }
+    #player-stats-leftnav h3 { font-size: 1.2em; }
+    #gameplay-content-area h2 { font-size: 1.5em; }
+}
+
+/* Existing animations like fadeIn, pulseGlow can remain */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulseGlow { 
+    0% { box-shadow: 0 0 3px var(--accent-hover); } 
+    50% { box-shadow: 0 0 10px var(--accent-hover), 0 0 7px var(--accent-color) inset; } 
+    100% { box-shadow: 0 0 3px var(--accent-hover); } 
+}
+
+/* Profile Page Styling */
+#content-profile h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.profile-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.profile-left {
+    flex-basis: 200px; /* Fixed width for avatar container */
+    text-align: center;
+}
+
+#profile-avatar-main {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px; /* Slightly rounded square */
+    border: 4px solid var(--border-color);
+    box-shadow: 0 0 15px var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.profile-right {
+    flex-grow: 1;
+}
+
+.profile-right p {
+    font-size: 1.1em;
+    margin-bottom: 0.8rem;
+    color: var(--primary-text);
+    border-bottom: 1px dashed var(--tertiary-bg);
+    padding-bottom: 0.8rem;
+}
+
+.profile-right p strong {
+    color: var(--header-text);
+    margin-right: 10px;
+    min-width: 80px; /* Align values somewhat */
+    display: inline-block;
+}
+
+.profile-right p span {
+    color: var(--highlight-text);
+}
+
+#go-to-settings-btn {
+    margin-top: 1rem;
+    /* General button styling will apply */
+}
+
+/* Settings Page Styling */
+#content-settings h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#content-settings div {
+    background-color: var(--tertiary-bg);
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#content-settings label {
+    display: block;
+    color: var(--header-text);
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+#avatar-url-input {
+    width: calc(100% - 22px); /* Adjust for padding/border */
+    margin-bottom: 1rem;
+}
+
+#save-avatar-btn {
+    /* General button styling applies */
+    display: block; /* Make it full width or centered if desired */
+    margin: 0 auto; /* Center if not full width */
+}
+
+#avatar-save-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+    /* Color will be set by JS (success/error class) */
+}
+
+.message-area {
+    /* This class is on the placeholder divs for action/cooldown messages */
+    /* Ensure it has some default styling if messages are shown there */
+    min-height: 24px; /* So layout doesn't jump when message appears */
+    margin-top: 1rem;
+}
+
+/* Adjustments for nav buttons if needed */
+#page-navigation .nav-button {
+    /* Existing button styles are good, .active is handled */
+}
+
+/* === Infernal Siege - Main Game Styles === */
+
+/* --- General Styles --- */
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-bg);
+    background-image: url('https://www.transparenttextures.com/patterns/dark-ritual.png'); /* More thematic texture */
+    color: var(--primary-text);
+    line-height: 1.6;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+/* --- Top Bar (Game Specific) --- */
+.game-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #251e16, #1a130a);
+    color: var(--header-text);
+    padding: 0.5rem 1.5rem; /* More padding */
+    border-bottom: 3px solid #000; /* Thicker, darker border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100%; /* Full width */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+#logo-area {
+    font-family: var(--font-secondary);
+    font-size: 1.7em;
+    font-weight: 700;
+    text-shadow: var(--text-shadow-header);
+    letter-spacing: 1px;
+    color: var(--header-text);
+}
+#logo-area i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+#external-links a {
+    font-family: var(--font-secondary);
+    color: var(--primary-text);
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: color 0.2s, text-shadow 0.2s;
+    font-size: 0.9em;
+}
+#external-links a:hover {
+    color: var(--highlight-text);
+    text-shadow: var(--text-shadow-glow);
+}
+#external-links a i { margin-right: 6px; }
+
+#user-info-top {
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+#user-info-top #player-username-clickable-area {
+    cursor: pointer;
+    color: var(--primary-text);
+    transition: color 0.2s ease;
+    padding: 5px;
+}
+#user-info-top #player-username-clickable-area:hover,
+#user-info-top #player-username-clickable-area:focus {
+    color: var(--highlight-text);
+    text-decoration: underline;
+    outline: none;
+}
+#user-info-top span#player-username-top {
+    color: var(--highlight-text); 
+    font-weight: 600;
+}
+
+#logout-btn-top {
+    background: none;
+    border: none;
+    color: var(--primary-text);
+    font-size: 1.2em; /* Icon size */
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+}
+#logout-btn-top:hover {
+    color: var(--accent-hover);
+    transform: scale(1.1);
+}
+
+/* --- Game Container --- */
+#game-container {
+    display: flex;
+    flex-grow: 1;
+    margin-top: 60px; /* Height of top-bar */
+    padding: 1.5rem; /* More padding around main layout */
+    gap: 1.5rem;
+}
+
+/* --- Left Navigation Bar (Game Specific) --- */
+.game-left-nav {
+    width: 260px; /* Slightly wider */
+    min-width: 260px;
+    background-color: var(--secondary-bg);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: var(--card-shadow), var(--inset-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#avatar-area {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+#player-avatar-leftnav {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px; /* Square-ish avatar */
+    border: 3px solid var(--border-color);
+    box-shadow: 0 0 12px rgba(0,0,0,0.5), 0 0 5px var(--accent-color) inset;
+    object-fit: cover;
+}
+
+.stats-panel h3 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+.stats-panel h3 i { margin-right: 8px; }
+
+.stats-panel p {
+    font-size: 0.95em;
+    margin: 0.6rem 0;
+    color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--tertiary-bg);
+    padding-bottom: 0.6rem;
+}
+.stats-panel p:last-child { border-bottom: none; }
+.stats-panel p i {
+    margin-right: 10px;
+    color: var(--header-text);
+    width: 16px; 
+    text-align: center;
+}
+.stats-panel p span {
+    color: var(--highlight-text); 
+    font-weight: 600;
+    margin-left: auto; /* Push stat value to the right */
+}
+
+.game-page-nav {
+    margin-top: auto; /* Push nav buttons to bottom of left bar */
+    padding-top: 1rem; /* Space above buttons */
+    border-top: 1px solid var(--border-color);
+}
+
+.game-page-nav .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    padding: 10px 12px;
+    background-color: var(--tertiary-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    font-family: var(--font-secondary);
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s, color 0.2s, border-left-color 0.2s;
+    border-left: 3px solid transparent;
+}
+.game-page-nav .nav-button i { width: 16px; text-align: center; color: var(--header-text);}
+.game-page-nav .nav-button:hover {
+    background-color: var(--accent-color);
+    color: var(--highlight-text);
+    border-left-color: var(--highlight-text);
+}
+.game-page-nav .nav-button.active {
+    background-color: var(--accent-hover);
+    color: var(--highlight-text);
+    font-weight: bold;
+    border-left: 3px solid var(--highlight-text);
+}
+.game-page-nav .nav-button.active i { color: var(--highlight-text); }
+
+/* --- Gameplay Content Area & Panels --- */
+#gameplay-content-area {
+    flex-grow: 1;
+    padding: 0; /* Remove padding, panels will have it */
+    border: none; /* Remove border, panels will have it */
+    box-shadow: none;
+    background-color: transparent; /* Let body bg show through gaps */
+}
+
+.game-content-panel {
+    background-color: var(--secondary-bg);
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow), var(--inset-shadow);
+    margin-bottom: 1.5rem; /* Space between panels if multiple are shown (not typical here) */
+}
+.game-content-panel:last-child { margin-bottom: 0; }
+
+.game-content-panel h2 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.7em;
+    letter-spacing: 1px;
+    text-shadow: var(--text-shadow-header);
+}
+.game-content-panel h2 i { margin-right: 12px; }
+
+.game-content-panel h3 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.3em;
+}
+
+.game-action-btn {
+    /* General button styling applies */
+    display: block; /* Make action buttons take full width or group them */
+    width: calc(100% - 4px); /* Account for potential border if any */
+    margin-bottom: 0.75rem;
+    padding: 12px 15px;
+    text-align: center; 
+}
+.game-action-btn i { margin-right: 8px; }
+.game-action-btn small {
+    display: block;
+    font-size: 0.75em;
+    color: var(--primary-text);
+    margin-top: 4px;
+    font-family: var(--font-primary);
+    text-transform: none; /* Override button uppercase */
+    letter-spacing: normal;
+}
+
+.game-content-panel .important-action {
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* --- Right Sidebar (Game Specific) --- */
+.game-right-sidebar {
+    width: 280px;
+    min-width: 280px;
+    background-color: var(--secondary-bg);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: var(--card-shadow), var(--inset-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-panel {
+    background-color: var(--tertiary-bg);
+    padding: 1.2rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+.sidebar-panel h2 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    font-size: 1.2em;
+    margin-top:0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+.sidebar-panel h2 i { margin-right: 8px; font-size: 0.9em; }
+
+#game-news-feed p {
+    font-size: 0.9em;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+#game-news-feed p:last-child { border-bottom: none; }
+
+/* Chat Styling - Inherits from main style.css, specific overrides here */
+#chat-tabs .chat-tab-btn {
+    background-color: var(--secondary-bg);
+    color: var(--primary-text);
+    font-family: var(--font-primary);
+    padding: 8px 10px;
+}
+#chat-tabs .chat-tab-btn.active {
+    background-color: var(--tertiary-bg);
+    color: var(--header-text);
+    border-bottom-color: var(--tertiary-bg);
+}
+#chat-tabs .chat-tab-btn i { margin-right: 5px;}
+
+#chat-feed {
+    height: 220px; /* More space */
+    background-color: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--inset-shadow);
+    padding: 0.75rem;
+}
+
+.chat-message {
+    padding: 0.3rem 0.2rem;
+    border-bottom: 1px solid #2a2828; /* Darker separator */
+    line-height: 1.5;
+}
+.chat-message:last-child { border-bottom: none; }
+
+.chat-timestamp {
+    color: #777;
+    font-size: 0.75em;
+    margin-right: 5px;
+}
+.chat-username {
+    font-weight: bold;
+    color: var(--header-text); /* Default user color */
+}
+.chat-username.own-message-user {
+    color: var(--accent-hover); /* Highlight own username */
+}
+.chat-username.admin-message-user {
+    color: var(--jail-color); /* Distinguish admin messages */
+    text-shadow: 0 0 3px var(--jail-color);
+}
+.system-message {
+    color: var(--event-color);
+    font-style: italic;
+}
+
+#chat-input-area input[type="text"] {
+    /* General form input styling applies */
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#chat-send-btn {
+    /* General button styling applies */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 10px 12px; /* Align with input height */
+    margin-left: -1px; /* Overlap border */
+}
+#chat-send-btn i { font-size: 1.1em; }
+
+/* Lists for Inventory & Game Log in main content */
+.game-item-list, .game-log-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.2);
+}
+.game-item-list li, .game-log-list li {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--tertiary-bg);
+}
+.game-item-list li:last-child, .game-log-list li:last-child { border-bottom: none; }
+
+/* Message Area Styling (Shared) */
+.message-area {
+    min-height: 24px; 
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem; 
+    font-weight: bold;
+    padding: 12px 15px;
+    border-radius: 4px;
+    text-align: center;
+    border: 1px solid transparent;
+    font-size: 0.95em;
+    box-shadow: var(--card-shadow);
+}
+.message-area.success { background-color: rgba(40, 167, 69, 0.2); color: var(--success-color); border-color: var(--success-color);}
+.message-area.error { background-color: rgba(220, 53, 69, 0.2); color: var(--error-color); border-color: var(--error-color);}
+.message-area.event { background-color: rgba(52, 152, 219, 0.2); color: var(--event-color); border-color: var(--event-color);}
+
+#cooldown-message-placeholder.message-area {
+    color: var(--jail-color);
+    background-color: rgba(230, 126, 34, 0.15);
+    border-color: var(--jail-color);
+}
+
+/* General Button Styling (Ensure it's defined once and consistently) */
+button {
+    /* ... already well-defined previously, confirm no conflicts */
+}
+
+/* --- General Forms (index.html) --- */
+.auth-form {
+    background-color: var(--secondary-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+}
+.auth-form h3 {
+    font-family: var(--font-secondary);
+    text-align: center;
+    color: var(--header-text);
+    margin-top: 0; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.auth-form input[type="text"], .auth-form input[type="password"] {
+    /* General form input styles apply */
+}
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+}
+.form-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--border-color), rgba(0, 0, 0, 0));
+    margin: 2rem 0;
+}
+
+/* Footer (Game Specific) */
+.game-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background-color: #000; /* Solid black footer */
+    color: #555;
+    border-top: 2px solid var(--border-color);
+    font-size: 0.85em;
+    margin-top: auto; /* Pushes footer to bottom */
+}
+
+/* Animations (as before) */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulseGlow { 
+    0% { box-shadow: 0 0 4px var(--accent-hover); } 
+    50% { box-shadow: 0 0 12px var(--accent-hover), 0 0 8px var(--accent-color) inset; } 
+    100% { box-shadow: 0 0 4px var(--accent-hover); } 
+}
+
+/* Dungeon Listing Styles */
+.dungeons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.dungeon-card {
+    background-color: var(--tertiary-bg); /* Slightly lighter than panel bg */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensure image respects border radius */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.dungeon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.dungeon-card img {
+    width: 100%;
+    height: 120px; /* Fixed height for dungeon card image */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dungeon-card-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Make content fill card */
+}
+
+.dungeon-card-content h3 {
+    font-family: var(--font-secondary);
+    color: var(--highlight-text);
+    font-size: 1.4em;
+    margin: 0 0 0.5rem 0;
+    border-bottom: none; /* Override general panel h2/h3 */
+    padding-bottom: 0;
+    text-shadow: var(--text-shadow-header);
+}
+.dungeon-card-content h3 i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+.dungeon-desc {
+    font-size: 0.9em;
+    color: var(--primary-text);
+    margin-bottom: 0.75rem;
+    flex-grow: 1; /* Allow description to take space */
+}
+
+.dungeon-card-content p strong {
+    color: var(--header-text);
+}
+
+.dungeon-reco-stats {
+    font-size: 0.85em;
+    color: var(--primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.dungeon-loot-preview {
+    font-size: 0.8em;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+.dungeon-loot-preview h4 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    font-size: 0.9em;
+    margin: 0 0 0.3rem 0;
+    font-weight: 600;
+}
+.dungeon-loot-preview ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dungeon-loot-preview li {
+    margin-bottom: 0.2rem;
+    color: var(--primary-text);
+}
+.dungeon-loot-preview li strong {
+    color: var(--highlight-text);
+    text-transform: capitalize;
+}
+
+.enter-dungeon-btn {
+    /* General .game-action-btn styles apply */
+    margin-top: auto; /* Push to bottom of card */
+    background-color: var(--accent-hover); /* Make it stand out a bit more */
+    width: 100%;
+}
+.enter-dungeon-btn:hover {
+    background-color: var(--accent-color);
+}
+
+/* Dungeon Run View (Placeholder) */
+#content-dungeon-run {
+    /* Uses .game-content-panel style */
+    text-align: center;
+}
+#content-dungeon-run p {
+    margin-bottom: 1rem;
+}
+
+/* Dungeon Victory Popup */
+.modal-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Above everything else */
+    animation: fadeInModal 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: var(--secondary-bg);
+    padding: 2rem 2.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    font-family: var(--font-secondary);
+    color: var(--accent-hover);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 2em;
+}
+.modal-content h2 i { margin-right: 10px; }
+
+.modal-content h4 {
+    font-family: var(--font-secondary);
+    color: var(--header-text);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 1rem;
+}
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+.modal-content li {
+    padding: 0.3rem 0;
+    color: var(--primary-text);
+}
+.modal-content li span {
+    color: var(--highlight-text);
+    font-weight: bold;
+}
+
+#exit-dungeon-popup-btn {
+    /* general button style applies */
+    padding: 10px 25px;
+    font-size: 1.1em;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Ensure chat message own/admin specific styles */
+.chat-message .chat-username.own-message-user { color: var(--accent-hover); }
+.chat-message .chat-username.admin-message-user { color: var(--jail-color); text-shadow: 0 0 4px var(--jail-color); }
+.chat-message.system-message { color: var(--event-color); font-style: italic; border-bottom-color: var(--event-color);}
+
+/* ... (rest of style.css) ... */ 
