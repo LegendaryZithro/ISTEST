@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infernal Siege - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body>
+    <div id="top-bar" class="game-top-bar">
+        <div id="logo-area"><i class="fas fa-shield-alt"></i> Infernal Siege</div>
+        <nav id="external-links">
+            <a href="#" id="wiki-link"><i class="fas fa-book"></i> Wiki</a>
+            <a href="#" id="discord-link"><i class="fab fa-discord"></i> Discord</a>
+        </nav>
+        <div id="user-info-top">
+             <span id="player-username-clickable-area">Welcome, <span id="player-username-top">Player</span>!</span>
+             <button id="logout-btn-top" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <nav id="left-nav-bar" class="game-left-nav">
+            <div id="avatar-area">
+                <img id="player-avatar-leftnav" src="https://via.placeholder.com/120/1a1a1a/d4ac6e?text=Avatar" alt="Player Avatar">
+            </div>
+            <div id="player-stats-leftnav" class="stats-panel">
+                <h3><i class="fas fa-user-shield"></i> Player Stats</h3>
+                <p><i class="fas fa-star"></i> Level: <span id="player-level">1</span></p>
+                <p><i class="fas fa-coins"></i> Money: $<span id="player-money">100</span></p>
+                <p><i class="fas fa-bolt"></i> Energy: <span id="player-energy">100</span>/<span id="player-max-energy">100</span></p>
+                <p><i class="fas fa-fist-raised"></i> Nerve: <span id="player-nerve">10</span>/<span id="player-max-nerve">10</span></p>
+                <p><i class="fas fa-dumbbell"></i> Strength: <span id="player-strength">1</span></p>
+                <p><i class="fas fa-running"></i> Agility: <span id="player-agility">1</span></p>
+            </div>
+            <div id="page-navigation" class="game-page-nav">
+                <button class="nav-button active" data-page="home"><i class="fas fa-home"></i> <span>Dashboard</span></button>
+                <button class="nav-button" data-page="profile"><i class="fas fa-id-card"></i> <span>Profile</span></button>
+                <button class="nav-button" data-page="crimes"><i class="fas fa-mask"></i> <span>Crimes</span></button>
+                <button class="nav-button" data-page="gym"><i class="fas fa-dumbbell"></i> <span>Gym</span></button>
+                <button class="nav-button" data-page="dungeons"><i class="fas fa-dungeon"></i> <span>Dungeons</span></button>
+                <button class="nav-button" data-page="inventory"><i class="fas fa-briefcase"></i> <span>Inventory</span></button>
+                <button class="nav-button" data-page="log"><i class="fas fa-scroll"></i> <span>Game Log</span></button>
+                <button class="nav-button" data-page="settings"><i class="fas fa-cog"></i> <span>Settings</span></button>
+            </div>
+        </nav>
+
+        <main id="gameplay-content-area">
+            <div id="content-home" class="page-content game-content-panel">
+                <h2><i class="fas fa-chess-rook"></i> Your Dominion</h2>
+                <p>The scent of brimstone hangs heavy. Command your actions from this bastion of control.</p>
+                <div id="action-message-placeholder" class="message-area"></div>
+                <div id="cooldown-message-placeholder" class="message-area"></div>
+            </div>
+
+            <div id="content-crimes" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-theater-masks"></i> Nefarious Deeds</h2>
+                <button id="action-crime-shoplift" class="game-action-btn important-action"><i class="fas fa-shopping-bag"></i> <span>Shoplift</span> <small>(2 Nerve, Low Risk)</small></button>
+                <button id="action-crime-pickpocket" class="game-action-btn important-action"><i class="fas fa-user-ninja"></i> <span>Pickpocket</span> <small>(3 Nerve, Med Risk)</small></button>
+                <button id="action-crime-robbery" class="game-action-btn important-action"><i class="fas fa-bomb"></i> <span>Minor Robbery</span> <small>(5 Nerve, High Risk)</small></button>
+            </div>
+
+            <div id="content-gym" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-khanda"></i> The Training Grounds</h2>
+                <button id="action-train-strength" class="game-action-btn"><i class="fas fa-dumbbell"></i> <span>Train Strength</span> <small>(20 Energy)</small></button>
+                <button id="action-train-agility" class="game-action-btn"><i class="fas fa-running"></i> <span>Train Agility</span> <small>(15 Energy)</small></button>
+            </div>
+            
+            <div id="content-inventory" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-box-open"></i> Your Hoard</h2>
+                <ul id="inventory-list-main" class="game-item-list">
+                    <li>No items yet.</li>
+                </ul>
+            </div>
+
+            <div id="content-log" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-book-dead"></i> The Chronicle</h2>
+                <ul id="log-list-main" class="game-log-list">
+                    <li>The siege begins...</li>
+                </ul>
+            </div>
+
+            <div id="content-profile" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-address-card"></i> Player Profile: <span id="profile-username"></span></h2>
+                <div class="profile-layout">
+                    <div class="profile-left">
+                        <img id="profile-avatar-main" src="https://via.placeholder.com/200/1a1a1a/d4ac6e?text=Avatar" alt="Profile Avatar">
+                    </div>
+                    <div class="profile-right">
+                        <p><strong>Role:</strong> <span id="profile-role">Player</span></p>
+                        <p><strong>Level:</strong> <span id="profile-level">1</span></p>
+                        <p><strong>Rank:</strong> <span id="profile-rank">Neophyte</span></p>
+                        <p><strong>Money:</strong> $<span id="profile-money">100</span></p>
+                        <p><strong>Strength:</strong> <span id="profile-strength-stat">1</span></p>
+                        <p><strong>Agility:</strong> <span id="profile-agility-stat">1</span></p>
+                        <button class="nav-button" id="go-to-settings-btn"><i class="fas fa-user-cog"></i> Account Settings</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-settings" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-tools"></i> Account Settings</h2>
+                <div>
+                    <label for="avatar-url-input">Avatar Image URL:</label>
+                    <input type="text" id="avatar-url-input" placeholder="https://example.com/avatar.png">
+                    <button id="save-avatar-btn">Save Avatar</button>
+                    <p id="avatar-save-message"></p>
+                </div>
+            </div>
+
+            <div id="content-dungeons" class="page-content game-content-panel" style="display:none;">
+                <h2><i class="fas fa-dungeon"></i> Forgotten Depths (Dungeons)</h2>
+                <div id="available-dungeons-list" class="dungeons-container">
+                    <p>Searching for nearby dungeons...</p>
+                </div>
+            </div>
+
+            <!-- Dungeon Run Content Area (Initially Hidden) -->
+            <div id="content-dungeon-run" class="content-section" style="display: none;">
+                <div id="dungeon-run-header">
+                    <h2 id="dungeon-run-name">Dungeon Name</h2>
+                    <p id="dungeon-run-encounter-status">Encounter 1 of X</p>
+                </div>
+                <div id="dungeon-player-combat-stats">
+                    <h3>Your Stats</h3>
+                    <p>Health: <span id="dungeon-player-health">--</span> / <span id="dungeon-player-max-health">--</span></p>
+                    <p>Energy/Mana (for skills): <span id="dungeon-player-skill-energy">--</span> / <span id="dungeon-player-max-skill-energy">--</span></p>
+                    <!-- Add more stats like strength, agility if relevant to display here -->
+                </div>
+                <div id="dungeon-enemies-area">
+                    <!-- Enemy cards will be dynamically inserted here -->
+                    <!-- Example Enemy Card Structure:
+                    <div class="enemy-card" data-instance-id="enemy_X_Y">
+                        <h4>Enemy Name (Instance ID)</h4>
+                        <img src="enemy_avatar_url" alt="Enemy Name" class="enemy-avatar">
+                        <p>Health: <span class="enemy-health">100</span> / <span class="enemy-max-health">100</span></p>
+                        <p>Attack: <span class="enemy-attack">10</span> | Defense: <span class="enemy-defense">5</span></p>
+                        <button class="attack-enemy-btn" data-target-instance-id="enemy_X_Y">Attack</button>
+                    </div>
+                    -->
+                </div>
+                <div id="dungeon-actions-area">
+                    <h3>Actions</h3>
+                    <!-- General combat actions or specific encounter actions -->
+                    <p class="combat-placeholder"><i>Combat actions will appear here. For now, attacking is per enemy.</i></p>
+                </div>
+                <div id="dungeon-combat-log">
+                    <h3>Combat Log</h3>
+                    <ul id="dungeon-log-messages">
+                        <li>Welcome to the dungeon!</li>
+                    </ul>
+                </div>
+                 <button id="exit-dungeon-early-btn" class="action-button alt-button" style="display:none;">Flee Dungeon (Defeat)</button>
+            </div>
+
+        </main>
+
+        <aside id="right-sidebar" class="game-right-sidebar">
+            <section id="game-news" class="sidebar-panel">
+                <h2><i class="far fa-newspaper"></i> War Dispatch</h2>
+                <div id="game-news-feed">
+                    <p>The Infernal Legions advance!</p>
+                    <p>Whispers of ancient artifacts echo through the ruins.</p>
+                </div>
+            </section>
+            <section id="chat-channel" class="sidebar-panel">
+                <h2><i class="fas fa-comments"></i> Infernal Comms</h2>
+                <div id="chat-tabs">
+                    <button class="chat-tab-btn active" data-chat="global"><i class="fas fa-globe"></i> Global</button>
+                    <button class="chat-tab-btn" data-chat="trade"><i class="fas fa-exchange-alt"></i> Trade</button>
+                    <button class="chat-tab-btn" data-chat="faction"><i class="fas fa-shield-alt"></i> Faction</button>
+                </div>
+                <div id="chat-feed"></div>
+                <div id="chat-input-area">
+                    <input type="text" id="chat-message-input" placeholder="Broadcast your decree...">
+                    <button id="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <footer class="game-footer">
+        <p>&copy; 2024 Infernal Siege - All rights reserved.</p>
+    </footer>
+
+    <script src="js/game.js"></script> 
+</body>
+</html> 

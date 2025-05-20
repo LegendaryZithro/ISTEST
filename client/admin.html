@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Realm of Despair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css"> <!-- Main theme for shared styles -->
+    <link rel="stylesheet" href="../css/admin_style.css"> <!-- Admin specific styles -->
+</head>
+<body id="admin-page"> <!-- Added ID for admin-specific body styles -->
+    <div id="admin-top-bar">
+        <div id="admin-header-title">Admin Control Panel</div>
+        <div id="admin-useful-stats">
+            <!-- Mock stats for now -->
+            <span>Players Online: <span id="players-online-count">1</span> (Mock)</span> 
+        </div>
+        <button id="return-to-game-btn">Return to Game</button>
+    </div>
+
+    <div id="admin-container">
+        <nav id="admin-left-nav">
+            <h2>Admin Menu</h2>
+            <button class="admin-nav-button active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></button>
+            <button class="admin-nav-button" data-page="users"><i class="fas fa-users-cog"></i> <span>Manage Users</span></button>
+            <button class="admin-nav-button" data-page="bots"><i class="fas fa-robot"></i> <span>Manage Bots</span></button>
+            <button class="admin-nav-button" data-page="items"><i class="fas fa-gem"></i> <span>Manage Items</span></button> 
+            <button class="admin-nav-button" data-page="npcs"><i class="fas fa-user-secret"></i> <span>Manage NPCs</span></button>
+            <button class="admin-nav-button" data-page="enemies"><i class="fas fa-dragon"></i> <span>Manage Enemies</span></button>
+            <button class="admin-nav-button" data-page="quests"><i class="fas fa-scroll"></i> <span>Manage Quests</span></button>
+            <button class="admin-nav-button" data-page="locations"><i class="fas fa-map-marked-alt"></i> <span>Manage Locations</span></button>
+            <button class="admin-nav-button" data-page="dungeons"><i class="fas fa-dungeon"></i> <span>Manage Dungeons</span></button>
+            <button class="admin-nav-button" data-page="game-settings"><i class="fas fa-cogs"></i> <span>Game Settings</span></button>
+            <button class="admin-nav-button" data-page="admin-logs"><i class="fas fa-history"></i> <span>Admin Logs</span></button>
+            <button class="admin-nav-button" data-page="editor"><i class="fas fa-paint-brush"></i> <span>Visual Editor</span></button> 
+        </nav>
+
+        <main id="admin-content-area">
+            <div id="admin-content-dashboard" class="admin-page-content">
+                <h2>Admin Dashboard Overview</h2>
+                <p>Welcome, Administrator. Use the menu to manage game aspects.</p>
+                <div class="admin-dashboard-cards">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-users"></i> Total Users</h3>
+                        <p id="total-users-stat">Loading...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-gem"></i> Total Items</h3>
+                        <p id="total-items-stat">Loading...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-user-secret"></i> Total NPCs</h3>
+                        <p id="total-npcs-stat">Loading...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-scroll"></i> Total Quests</h3>
+                        <p id="total-quests-stat">Loading...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-map-marked-alt"></i> Total Locations</h3>
+                        <p id="total-locations-stat">Loading...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-server"></i> Server Status</h3>
+                        <p id="server-status-stat" class="status-ok">Nominal</p>
+                    </div>
+                </div>
+
+                <div class="admin-recent-activity">
+                    <div class="activity-column">
+                        <h3><i class="fas fa-user-plus"></i> Recently Registered Users</h3>
+                        <ul id="recent-users-list" class="modern-list">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+                    <div class="activity-column">
+                        <h3><i class="fas fa-history"></i> Recent Admin Actions</h3>
+                        <ul id="recent-admin-logs-list" class="modern-list">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="admin-content-users" class="admin-page-content" style="display: none;">
+                <h2>Manage Users</h2>
+                <div id="user-list-container">
+                    <!-- User list will be populated here by admin.js -->
+                    <p>Loading users...</p>
+                </div>
+                <!-- Edit User Details Form (Initially Hidden) -->
+                <form id="edit-user-details-form" class="admin-form modern-form" style="display:none;">
+                    <h3><i class="fas fa-user-edit"></i> Edit User: <span id="edit-user-username-title"></span></h3>
+                    <input type="hidden" id="edit-user-original-username">
+                    <div class="form-grid">
+                        <div><label for="edit-user-money">Money:</label><input type="number" id="edit-user-money" min="0"></div>
+                        <div><label for="edit-user-level">Level:</label><input type="number" id="edit-user-level" min="1"></div>
+                        <div><label for="edit-user-strength">Strength:</label><input type="number" id="edit-user-strength" min="0"></div>
+                        <div><label for="edit-user-agility">Agility:</label><input type="number" id="edit-user-agility" min="0"></div>
+                        <div><label for="edit-user-rank">Rank:</label><input type="text" id="edit-user-rank"></div>
+                        <div><label for="edit-user-avatar">Avatar URL:</label><input type="text" id="edit-user-avatar"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Details</button>
+                        <button type="button" id="cancel-edit-user-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="edit-user-message" class="message-area"></p>
+                </form>
+            </div>
+            <div id="admin-content-items" class="admin-page-content" style="display: none;">
+                <h2>Manage Game Items</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-item-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Item</button>
+                </div>
+                <form id="add-edit-item-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="item-form-mode" value="add">
+                    <input type="hidden" id="item-form-edit-id" value="">
+                    <h3><i class="fas fa-edit"></i> <span id="item-form-title">Add New</span> Item</h3>
+                    <div class="form-grid">
+                        <div><label for="item-id">Item ID (Unique):</label><input type="text" id="item-id" required></div>
+                        <div><label for="item-name">Name:</label><input type="text" id="item-name" required></div>
+                        <div><label for="item-type">Type:</label>
+                            <select id="item-type">
+                                <option value="weapon">Weapon</option><option value="armor">Armor</option><option value="consumable">Consumable</option><option value="collectible">Collectible</option><option value="tool">Tool</option><option value="currency">Currency</option><option value="quest">Quest Item</option>
+                            </select>
+                        </div>
+                        <div><label for="item-value">Value (Gold):</label><input type="number" id="item-value" value="0" min="0"></div>
+                        <div class="checkbox-group"><input type="checkbox" id="item-stackable"><label for="item-stackable">Stackable</label></div>
+                        <div><label for="item-image-url">Image URL (Optional):</label><input type="text" id="item-image-url"></div>
+                    </div>
+                    <div><label for="item-description">Description:</label><textarea id="item-description" rows="3"></textarea></div>
+                    <div><label for="item-effects">Effects (JSON):</label><textarea id="item-effects" rows="3" placeholder='{"stat": value}'></textarea></div>
+                    <div><label for="item-data">Other Data (JSON):</label><textarea id="item-data" rows="3" placeholder='{"key": "value"}'></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-item-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Item</button>
+                        <button type="button" id="cancel-item-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="item-form-message" class="message-area"></p>
+                </form>
+                <div id="item-list-container">
+                    <p>Loading items...</p>
+                    <!-- Item table will be populated here -->
+                </div>
+            </div>
+            <div id="admin-content-npcs" class="admin-page-content" style="display: none;">
+                <h2>Manage Game NPCs</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-npc-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New NPC</button>
+                </div>
+                <form id="add-edit-npc-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="npc-form-mode" value="add">
+                    <input type="hidden" id="npc-form-edit-id" value="">
+                    <h3><i class="fas fa-user-plus"></i> <span id="npc-form-title">Add New</span> NPC</h3>
+                    <div class="form-grid">
+                        <div><label for="npc-id">NPC ID (Unique):</label><input type="text" id="npc-id" required></div>
+                        <div><label for="npc-name">Name:</label><input type="text" id="npc-name" required></div>
+                        <div><label for="npc-avatar-url">Avatar URL (Optional):</label><input type="text" id="npc-avatar-url"></div>
+                        <div><label for="npc-location-id">Location ID (Optional):</label><input type="text" id="npc-location-id"></div>
+                    </div>
+                    <div><label for="npc-description">Description:</label><textarea id="npc-description" rows="2"></textarea></div>
+                    <div><label for="npc-dialogue">Initial Dialogue:</label><textarea id="npc-dialogue" rows="3"></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-npc-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save NPC</button>
+                        <button type="button" id="cancel-npc-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="npc-form-message" class="message-area"></p>
+                </form>
+                <div id="npc-list-container">
+                    <p>Loading NPCs...</p>
+                    <!-- NPC table will be populated here -->
+                </div>
+            </div>
+            <div id="admin-content-enemies" class="admin-page-content" style="display: none;">
+                <h2>Manage Game Enemies</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-enemy-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Enemy</button>
+                </div>
+                <form id="add-edit-enemy-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="enemy-form-mode" value="add">
+                    <input type="hidden" id="enemy-form-edit-id" value="">
+                    <h3><i class="fas fa-skull-crossbones"></i> <span id="enemy-form-title">Add New</span> Enemy</h3>
+                    <div class="form-grid">
+                        <div><label for="enemy-id">Enemy ID (Unique):</label><input type="text" id="enemy-id" required></div>
+                        <div><label for="enemy-name">Name:</label><input type="text" id="enemy-name" required></div>
+                        <div><label for="enemy-avatar-url">Avatar URL (Optional):</label><input type="text" id="enemy-avatar-url"></div>
+                        <div><label for="enemy-health">Health:</label><input type="number" id="enemy-health" value="10" min="1" required></div>
+                        <div><label for="enemy-attack">Attack:</label><input type="number" id="enemy-attack" value="2" min="0" required></div>
+                        <div><label for="enemy-defense">Defense:</label><input type="number" id="enemy-defense" value="0" min="0" required></div>
+                        <div><label for="enemy-xp-reward">XP Reward:</label><input type="number" id="enemy-xp-reward" value="5" min="0" required></div>
+                        <div><label for="enemy-money-drop-min">Min Money Drop:</label><input type="number" id="enemy-money-drop-min" value="0" min="0"></div>
+                        <div><label for="enemy-money-drop-max">Max Money Drop:</label><input type="number" id="enemy-money-drop-max" value="5" min="0"></div>
+                    </div>
+                    <div><label for="enemy-description">Description:</label><textarea id="enemy-description" rows="2"></textarea></div>
+                    <div><label for="enemy-data">Other Data (JSON, e.g. {"resistances": ["fire"], "abilities": ["charge"]} ):</label><textarea id="enemy-data" rows="3" placeholder='{"custom_key": "value"}'></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-enemy-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Enemy</button>
+                        <button type="button" id="cancel-enemy-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="enemy-form-message" class="message-area"></p>
+                </form>
+                <div id="enemy-list-container">
+                    <p>Loading enemies...</p>
+                </div>
+            </div>
+            <div id="admin-content-quests" class="admin-page-content" style="display: none;">
+                <h2>Manage Game Quests</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-quest-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Quest</button>
+                </div>
+                <form id="add-edit-quest-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="quest-form-mode" value="add">
+                    <input type="hidden" id="quest-form-edit-id" value="">
+                    <h3><i class="fas fa-book-open"></i> <span id="quest-form-title">Add New</span> Quest</h3>
+                    <div class="form-grid">
+                        <div><label for="quest-id">Quest ID (Unique):</label><input type="text" id="quest-id" required></div>
+                        <div><label for="quest-title">Title:</label><input type="text" id="quest-title" required></div>
+                        <div><label for="quest-start-npc-id">Start NPC ID (Optional):</label><input type="text" id="quest-start-npc-id"></div>
+                        <div><label for="quest-end-npc-id">End NPC ID (Optional):</label><input type="text" id="quest-end-npc-id"></div>
+                        <div class="checkbox-group"><input type="checkbox" id="quest-is-repeatable"><label for="quest-is-repeatable">Is Repeatable?</label></div>
+                    </div>
+                    <div><label for="quest-description">Description:</label><textarea id="quest-description" rows="3"></textarea></div>
+                    <div><label for="quest-objectives-summary">Objectives Summary (Text):</label><textarea id="quest-objectives-summary" rows="3"></textarea></div>
+                    <div><label for="quest-prerequisites">Prerequisites (JSON, e.g., {"level_required": 5}):</label><textarea id="quest-prerequisites" rows="2" placeholder='{\"level_required\": 5, \"quest_required\": \"other_quest_id\"}'></textarea></div>
+                    <div><label for="quest-rewards">Rewards (JSON, e.g., {"xp": 100, "money": 50, "item_ids": ["item1"] }):</label><textarea id="quest-rewards" rows="3" placeholder='{\"xp\": 100, \"money\": 50, \"item_ids\": [\"item_id1\"]}'></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-quest-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Quest</button>
+                        <button type="button" id="cancel-quest-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="quest-form-message" class="message-area"></p>
+                </form>
+                <div id="quest-list-container">
+                    <p>Loading quests...</p>
+                </div>
+            </div>
+            <div id="admin-content-editor" class="admin-page-content" style="display: none;">
+                <h2>Visual Page Editor (Conceptual Mock-up)</h2>
+                <div id="visual-editor-controls">
+                    <label for="page-selector">Select Page:</label>
+                    <select id="page-selector">
+                        <option value="../index.html">Landing Page</option> <option value="../game.html">Game Page</option> <option value="../admin.html">Admin Dashboard</option>
+                    </select>
+                    <div id="mock-toolbar">
+                        <button class="mock-tool-btn" title="Select (Mock)"><i class="fas fa-mouse-pointer"></i></button>
+                        <button class="mock-tool-btn" title="Text (Mock)"><i class="fas fa-font"></i></button>
+                        <button class="mock-tool-btn" title="Color (Mock)"><i class="fas fa-palette"></i></button>
+                    </div>
+                    <div id="editor-actions">
+                        <button id="visual-editor-undo-btn"><i class="fas fa-undo"></i> Undo (Mock)</button>
+                        <button id="visual-editor-save-btn" class="primary-action-btn"><i class="fas fa-save"></i> Save (Mock)</button>
+                    </div>
+                </div>
+                <div id="visual-editor-canvas-container">
+                    <p class="editor-note">Note: This is a conceptual mock-up. True visual editing and saving of code files is not possible from client-side JavaScript due to security restrictions. The selected page is displayed below in an iframe for viewing purposes only.</p>
+                    <iframe id="visual-editor-canvas" title="Visual Editor Canvas"></iframe>
+                </div>
+            </div>
+            <div id="admin-content-game-settings" class="admin-page-content" style="display: none;">
+                <h2>Global Game Settings</h2>
+                <form id="game-settings-form" class="admin-form modern-form">
+                    <p>Edit global game parameters. Changes will apply to all players after server restart or next config load by clients.</p>
+                    <div id="game-settings-fields-container">
+                        <!-- Config fields will be dynamically populated here -->
+                        <p>Loading game settings...</p>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-game-settings-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save All Settings</button>
+                    </div>
+                    <p id="game-settings-form-message" class="message-area"></p>
+                </form>
+            </div>
+            <div id="admin-content-locations" class="admin-page-content" style="display: none;">
+                <h2>Manage Game Locations</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-location-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Location</button>
+                </div>
+                <form id="add-edit-location-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="location-form-mode" value="add">
+                    <input type="hidden" id="location-form-edit-id" value="">
+                    <h3><i class="fas fa-map-signs"></i> <span id="location-form-title">Add New</span> Location</h3>
+                    <div class="form-grid">
+                        <div><label for="location-id">Location ID (Unique):</label><input type="text" id="location-id" required></div>
+                        <div><label for="location-name">Name:</label><input type="text" id="location-name" required></div>
+                        <div><label for="location-image-url">Image URL (Optional):</label><input type="text" id="location-image-url"></div>
+                    </div>
+                    <div><label for="location-description">Description:</label><textarea id="location-description" rows="3"></textarea></div>
+                    <div><label for="location-connections">Connections (JSON, e.g. {"north": "loc_id"}):</label><textarea id="location-connections" rows="3" placeholder='{"direction": "target_location_id"}'></textarea></div>
+                    <div><label for="location-data">Other Data (JSON, e.g. {"is_safe_zone": true}):</label><textarea id="location-data" rows="3" placeholder='{"custom_key": "value"}'></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-location-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Location</button>
+                        <button type="button" id="cancel-location-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="location-form-message" class="message-area"></p>
+                </form>
+                <div id="location-list-container">
+                    <p>Loading locations...</p>
+                </div>
+            </div>
+            <div id="admin-content-logs" class="admin-page-content" style="display: none;">
+                <h2>Admin Action Logs</h2>
+                <div class="admin-section-controls">
+                    <!-- Add filters here later if needed -->
+                    <button id="refresh-admin-logs-btn" class="control-button"><i class="fas fa-sync-alt"></i> Refresh Logs</button>
+                </div>
+                <div id="admin-log-list-container">
+                    <p>Loading admin logs...</p>
+                    <!-- Log table will be populated here -->
+                </div>
+                <div class="pagination-controls" id="admin-log-pagination">
+                    <button id="admin-log-prev-page" disabled>&laquo; Prev</button>
+                    <span id="admin-log-page-info">Page 1 of 1</span>
+                    <button id="admin-log-next-page" disabled>Next &raquo;</button>
+                </div>
+            </div>
+            <div id="admin-content-bots" class="admin-page-content" style="display: none;">
+                <h2>Manage Bot Users</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-bot-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Bot User</button>
+                </div>
+                <form id="add-bot-form" class="admin-form modern-form" style="display:none;">
+                    <h3><i class="fas fa-robot"></i> Add New Bot User</h3>
+                    <div class="form-grid">
+                        <div><label for="bot-username">Bot Username:</label><input type="text" id="bot-username" required></div>
+                        <div><label for="bot-password">Password:</label><input type="password" id="bot-password" required></div>
+                        <!-- Initial stats for bots can be simplified or expanded -->
+                        <div><label for="bot-initial-level">Initial Level (Optional):</label><input type="number" id="bot-initial-level" value="1" min="1"></div>
+                        <div><label for="bot-initial-money">Initial Money (Optional):</label><input type="number" id="bot-initial-money" value="50" min="0"></div> 
+                    </div>
+                     <p class="tool-note">Bots are automatically assigned the 'player' role and an `is_bot=1` flag. Their stats will default if not specified.</p>
+                    <div class="form-actions">
+                        <button type="submit" id="save-bot-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Create Bot</button>
+                        <button type="button" id="cancel-bot-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="bot-form-message" class="message-area"></p>
+                </form>
+                <div id="bot-list-container">
+                    <p>Loading bot users...</p>
+                    <!-- Bot user table will be populated here -->
+                </div>
+            </div>
+            <div id="admin-content-dungeons" class="admin-page-content" style="display: none;">
+                <h2>Manage Dungeons</h2>
+                <div class="admin-section-controls">
+                    <button id="show-add-dungeon-form-btn" class="control-button"><i class="fas fa-plus-circle"></i> Add New Dungeon</button>
+                </div>
+                <form id="add-edit-dungeon-form" class="admin-form modern-form" style="display:none;">
+                    <input type="hidden" id="dungeon-form-mode" value="add">
+                    <input type="hidden" id="dungeon-form-edit-id" value="">
+                    <h3><i class="fas fa-dungeon"></i> <span id="dungeon-form-title">Add New</span> Dungeon</h3>
+                    <div class="form-grid">
+                        <div><label for="dungeon-id">Dungeon ID (Unique):</label><input type="text" id="dungeon-id" required></div>
+                        <div><label for="dungeon-name">Name:</label><input type="text" id="dungeon-name" required></div>
+                        <div><label for="dungeon-image-url">Image URL (Optional):</label><input type="text" id="dungeon-image-url"></div>
+                        <div><label for="dungeon-recommended-level">Recommended Level:</label><input type="number" id="dungeon-recommended-level" value="1" min="1"></div>
+                    </div>
+                    <div><label for="dungeon-description">Description:</label><textarea id="dungeon-description" rows="3"></textarea></div>
+                    <div><label for="dungeon-recommended-stats">Recommended Stats (JSON, e.g. {"strength": 10}):</label><textarea id="dungeon-recommended-stats" rows="2" placeholder='{"stat": value}'></textarea></div>
+                    <div><label for="dungeon-encounter-sequence">Encounter Sequence (JSON Array):</label><textarea id="dungeon-encounter-sequence" rows="4" placeholder='[{"type":"mob", "enemy_id":"goblin", "count":3}, {"type":"boss", "enemy_id":"goblin_chief"}]'></textarea></div>
+                    <div class="form-actions">
+                        <button type="submit" id="save-dungeon-btn" class="control-button primary-action-btn"><i class="fas fa-save"></i> Save Dungeon</button>
+                        <button type="button" id="cancel-dungeon-form-btn" class="control-button alt-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                    </div>
+                    <p id="dungeon-form-message" class="message-area"></p>
+                </form>
+                <div id="dungeon-list-container">
+                    <p>Loading dungeons...</p>
+                </div>
+
+                <!-- Loot Table Management (shown when a dungeon is selected/edited) -->
+                <div id="dungeon-loot-manager" style="display:none; margin-top: 2rem; padding-top:1.5rem; border-top:1px solid var(--admin-border-color);">
+                    <h3><i class="fas fa-treasure-chest"></i> Manage Loot for: <span id="loot-manager-dungeon-name"></span></h3>
+                    <form id="add-loot-item-form" class="admin-form modern-form small-form">
+                        <h4>Add Item to Loot Table</h4>
+                         <input type="hidden" id="loot-dungeon-id-ref">
+                        <div class="form-grid compact-grid">
+                            <div><label for="loot-item-id">Item ID:</label>
+                                <select id="loot-item-id"><!-- Populated by JS --></select>
+                            </div>
+                            <div><label for="loot-rarity">Rarity:</label>
+                                <select id="loot-rarity">
+                                    <option value="common">Common</option><option value="uncommon">Uncommon</option><option value="rare">Rare</option><option value="legendary">Legendary</option><option value="mythical">Mythical</option>
+                                </select>
+                            </div>
+                            <div><label for="loot-drop-chance">Drop Chance (0.0-1.0):</label><input type="number" id="loot-drop-chance" step="0.01" min="0" max="1" value="0.1"></div>
+                            <div><label for="loot-min-quantity">Min Qty:</label><input type="number" id="loot-min-quantity" value="1" min="1"></div>
+                            <div><label for="loot-max-quantity">Max Qty:</label><input type="number" id="loot-max-quantity" value="1" min="1"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="control-button"><i class="fas fa-plus"></i> Add Loot Item</button>
+                        </div>
+                         <p id="loot-form-message" class="message-area"></p>
+                    </form>
+                    <div id="dungeon-loot-table-container" style="margin-top:1rem;">
+                        <p>Select a dungeon to view/edit its loot table.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script> <!-- Admin specific JS -->
+    <!-- Font Awesome for icons -->
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</body>
+</html> 
